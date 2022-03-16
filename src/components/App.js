@@ -38,7 +38,17 @@ class App extends Component {
         SocialNetwork.abi,
         networkData.address
       );
-      console.log("socialNetwork :>> ", socialNetwork);
+      this.setState({ socialNetwork });
+      // const postCount = await socialNetwork.methods.postCount().cal();
+      // this.setState({ postCount });
+      // // Load Posts
+      // for (var i = 1; i <= postCount; i++) {
+      //   const post = await socialNetwork.methods.posts(i).call();
+      //   this.setState({
+      //     posts: [...this.state.posts, post],
+      //   });
+      //   console.log("posts :>> ", this.state.posts);
+      // }
     } else {
       window.alert("SocialNetwork contract not deployed to detected network.");
     }
@@ -48,6 +58,9 @@ class App extends Component {
     super(props);
     this.state = {
       account: "",
+      socialNetwork: null,
+      postCount: 0,
+      posts: [],
     };
   }
 

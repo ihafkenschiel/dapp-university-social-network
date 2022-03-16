@@ -4,6 +4,11 @@ import SocialNetwork from "../abis/SocialNetwork.json";
 import logo from "../logo.png";
 import "./App.css";
 
+/**
+ * 1. Create Posts
+ * 2. List all the posts
+ * 3. Tip post authors with cryptocurrency
+ */
 class App extends Component {
   async componentWillMount() {
     await this.loadWeb3();
@@ -39,16 +44,6 @@ class App extends Component {
         networkData.address
       );
       this.setState({ socialNetwork });
-      // const postCount = await socialNetwork.methods.postCount().cal();
-      // this.setState({ postCount });
-      // // Load Posts
-      // for (var i = 1; i <= postCount; i++) {
-      //   const post = await socialNetwork.methods.posts(i).call();
-      //   this.setState({
-      //     posts: [...this.state.posts, post],
-      //   });
-      //   console.log("posts :>> ", this.state.posts);
-      // }
     } else {
       window.alert("SocialNetwork contract not deployed to detected network.");
     }

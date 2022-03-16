@@ -16,3 +16,14 @@ truffle console
 > name = await contract.name()
 > name
 ```
+
+## Ganache
+
+Install Ganache and run it
+
+It will give you an RPC server URL
+Eg. `HTTP://127.0.0.1:7545`
+
+Set up a new network on MetaMask for Ganache and put the Chain ID as `1337` (the default for Ganache)
+
+Switch to the Ganache network and check the console log to see your network ID (it should match the one in Ganache)

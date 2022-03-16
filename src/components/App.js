@@ -32,8 +32,13 @@ class App extends Component {
     this.setState({ account: accounts[0] });
     // Network ID
     const networkId = await web3.eth.net.getId();
-    if (SocialNetwork.networks[networkId]) {
-      console.log("networkId :>> ", networkId);
+    const networkData = SocialNetwork.networks[networkId];
+    if (networkData) {
+      const socialNetwork = web3.eth.Contract(
+        SocialNetwork.abi,
+        networkData.address
+      );
+      console.log("socialNetwork :>> ", socialNetwork);
     } else {
       window.alert("SocialNetwork contract not deployed to detected network.");
     }

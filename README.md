@@ -32,3 +32,7 @@ Eg. `HTTP://127.0.0.1:7545`
 Set up a new network on MetaMask for Ganache and put the Chain ID as `1337` (the default for Ganache)
 
 Switch to the Ganache network and check the console log to see your network ID (it should match the one in Ganache)
+
+## Importing Accounts from Ganache to MetaMask
+
+Copy the private keys from the first 3 Ganache accounts (the ones we are using in this project) and go to Metamask and import the accounts individually. You can name them respectively: `Deployer`, `Poster` and `Tipper`.

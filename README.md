@@ -17,6 +17,11 @@ truffle console
 > name
 ```
 
+## Deploy Contract
+```
+truffle migrate --reset
+```
+
 ## Ganache
 
 Install Ganache and run it

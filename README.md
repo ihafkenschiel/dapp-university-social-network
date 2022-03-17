@@ -36,3 +36,13 @@ Switch to the Ganache network and check the console log to see your network ID (
 ## Importing Accounts from Ganache to MetaMask
 
 Copy the private keys from the first 3 Ganache accounts (the ones we are using in this project) and go to Metamask and import the accounts individually. You can name them respectively: `Deployer`, `Poster` and `Tipper`.
+
+## Manually Run a Contract Method from Truffle Console
+
+Eg. Write a Post
+
+```
+truffle console
+sn = await SocialNetwork.deployed()
+await sn.createPost('This is my first post!')
+```

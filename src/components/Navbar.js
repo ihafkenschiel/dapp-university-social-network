@@ -1,5 +1,7 @@
 import * as React from 'react'
 import Identicon from 'identicon.js'
+// Local
+import Logo from './Logo'
 
 const Navbar = ({ account }) => {
   const icon = account ? new Identicon(account, 30).toString() : null
@@ -11,7 +13,7 @@ const Navbar = ({ account }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Handbook
+        <Logo /> Handbook
       </a>
       <ul className="navbar-nav px-3">
         <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">

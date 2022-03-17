@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import Web3 from 'web3'
 // Local
+import './App.css'
+import SocialNetwork from '../abis/SocialNetwork.json'
 import Navbar from './Navbar'
 import Logo from './Logo'
-import './App.css'
 
 /**
  * 1. Create Posts
@@ -35,25 +36,70 @@ class App extends Component {
     const accounts = await web3.eth.getAccounts()
     console.log('accounts :>> ', accounts)
     this.setState({ account: accounts[0] })
+    // Network ID
+    const networkId = await web3.eth.net.getId()
+    // Address
+    const networkData = SocialNetwork.networks[networkId]
+    if (networkData) {
+      const socialNetwork = web3.eth.Contract(
+        SocialNetwork.abi,
+        networkData.address
+      )
+      this.setState({ socialNetwork })
+      const postCount = await socialNetwork.methods.postCount().call()
+      this.setState({ postCount })
+      // Load Posts
+      for (var i = 1; i <= postCount; i++) {
+        const post = await socialNetwork.methods.posts(i).call()
+        this.setState({ posts: [...this.state.posts, post] })
+      }
+    } else {
+      window.alert(
+        'Social Network has not been deployed to the blockchain. See README.md'
+      )
+    }
+    // ABI
   }
 
   constructor(props) {
     super(props)
     this.state = {
       account: '',
+      socialNetwork: null,
+      postCount: 0,
+      posts: [],
     }
   }
 
   render() {
+    console.log('posts :>> ', this.state.posts)
+
     return (
       <div>
         <Navbar account={this.state.account} />
 
         <div className="container-fluid mt-5">
           <div className="row">
-            <main role="main" className="col-lg-12 d-flex text-center">
+            <main
+              role="main"
+              className="col-lg-12 ml-auto mr-auto"
+              style={{ maxWidth: '500px' }}
+            >
               <div className="content mr-auto ml-auto">
-                <Logo />
+                {this.state.posts.map((post, key) => (
+                  <div key={key} class="card" style={{ width: '18rem' }}>
+                    <div class="card-body">
+                      <h5 class="card-title">{post.content}</h5>
+                      <p class="card-text">{post.author}</p>
+                    </div>
+                    <div class="card-body">
+                      <span>1 ETH received</span>
+                      <a href="#" class="card-link">
+                        Tip: 0.1 ETH
+                      </a>
+                    </div>
+                  </div>
+                ))}
               </div>
             </main>
           </div>
